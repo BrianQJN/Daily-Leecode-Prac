@@ -49,7 +49,7 @@ class Solution(object):
             cur = cur.next
         
         if carry:
-            cur.next = carry
+            cur.next = ListNode(carry)
             cur = cur.next
         
         return head.next
