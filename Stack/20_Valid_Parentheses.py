@@ -22,7 +22,7 @@ class Solution(object):
             if char not in parentheses_map:
                 stack.append(char)
                 continue
-            if not stack or stack[-1] != parentheses_map[char]:
+            if not stack or parentheses_map[char] != stack[-1]:
                 return False
             stack.pop()
         
