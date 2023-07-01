@@ -1,6 +1,17 @@
-test = {'a': 1, 'b': 2, 'c': 3}
-print(list(test.values()))
-test2 = {'a': 1, 'b': 2, 'c': 3}
-print(list(test2.values()))
-print(list(test.values()) == list(test2.values()))
-print(test.keys() == test2.keys())
+def subsets(nums):
+    result = []
+    
+    def backtrack(start, subset):
+        result.append(subset[:])
+        
+        for i in range(start, len(nums)):
+            subset.append(nums[i])
+            backtrack(i + 1, subset)
+            subset.pop()
+    
+    backtrack(0, [])
+    return result
+
+print(subsets([1,2,3]))
+
+
