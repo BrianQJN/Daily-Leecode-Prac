@@ -26,8 +26,21 @@ class Solution(object):
             i += 1
 
         return res
+    
+    def dailyTemperatures2(self, temperatures):
+        stack = []
+        res = [0] * len(temperatures)
+
+        for index, temp in enumerate(temperatures):
+            while stack and temp > stack[-1][0]:
+                stackT, stackI = stack.pop()
+                res[stackI] = index - stackI
+            stack.append((temp, index))
+        
+        return res
 
 
 if __name__ == "__main__":
     test = Solution
     print(test.dailyTemperatures(test,[73,74,75,71,69,72,76,73]))
+    print(test.dailyTemperatures2(test,[73,74,75,71,69,72,76,73]))
