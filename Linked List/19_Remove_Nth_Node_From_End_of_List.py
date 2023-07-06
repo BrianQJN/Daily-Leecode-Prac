@@ -12,7 +12,7 @@ class ListNode:
 
 class Solution:
     def removeNthFromEndOfList(self, head, n):
-        dummy = ListNode(0, head)
+        dummy = ListNode(0,  head)
         left = dummy
         right = head
 
@@ -23,7 +23,7 @@ class Solution:
         while right:
             left = left.next
             right = right.next
-
-        # delete
+        
         left.next = left.next.next
-        return dummy.next
+
+        return dummy
