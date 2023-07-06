@@ -28,8 +28,7 @@ lRUCache.get(4);    // return 4
 """
 class Node:
     def __init__(self, key, value):
-        self.key = key
-        self.val = value
+        self.key, self.value = key, value
         self.prev = self.next = None
 
 class LRUCache(object):
@@ -38,34 +37,52 @@ class LRUCache(object):
         """
         :type capacity: int
         """
-        self. cap = capacity
-        self.cache = {}
-        self.left, self.right = Node(0, 0), Node(0, 0)
-        self.left.next, self.right.prev = self.right, self.left
+        self.capacity = capacity
+        self.cache = {} # format: {key: node}
+
+        # left means the least used, right means the recently used
+        self.left, self.right = Node(0,0), Node(0,0)
+        self.left.next = self.right
+        self.right.prev = self.left
 
     # remove node from list
     def remove(self, node):
-        prev, nxt = node.prev, node.next
-        prev.next, nxt.prev = nxt, prev
+        """
+        :type node: Node
+        :rtype: None
+        """
+        # remove a node from the list, we need to point the last node to the next node
+        prev, next = node.prev, node.next
+        prev.next = next
+        next.prev = prev
 
     # insert node at right
     def insert(self, node):
-        prev, nxt = self.right.prev, self.right
-        prev.next = nxt.prev = node
-        node.next, node.prev = nxt, prev
+        """
+        :type node: Node
+        :rtype: None
+        """
+        # insert a node at the right, we need to point the previous node of right to the new node, and new node to the right
+        prev, next = self.right.prev, self.right
+        prev.next = node
+        next.prev = node
+        node.next = next
+        node.prev = prev
 
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
+        # get from cache if key exists, else return -1
+        # since if the key exists, we need to update the linked list status
         if key in self.cache:
             self.remove(self.cache[key])
             self.insert(self.cache[key])
-            return self.cache[key].val
+            return self.cache[key].value
+        
         return -1
-
-
+        
     def put(self, key, value):
         """
         :type key: int
@@ -77,7 +94,7 @@ class LRUCache(object):
         self.cache[key] = Node(key, value)
         self.insert(self.cache[key])
 
-        if len(self.cache) > self.cap:
+        if len(self.cache) > self.capacity:
             lru = self.left.next
             self.remove(lru)
             del self.cache[lru.key]
