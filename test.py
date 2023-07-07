@@ -1,1 +1,3 @@
-print(15//2)
+root = []
+if not root:
+    print(root)
