@@ -18,7 +18,7 @@ class TreeNode(object):
 
 class Solution:
     def diameterOfBinaryTree(self, root):
-        self.ans = 1
+        self.ans = 0
         def depth(node):
             # 访问到空节点了，返回0
             if not node:
@@ -33,4 +33,4 @@ class Solution:
             return max(L, R) + 1
 
         depth(root)
-        return self.ans - 1
+        return self.ans
