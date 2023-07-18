@@ -59,5 +59,3 @@ class Codec:
             return node
         
         return dfs()
-    
-    
