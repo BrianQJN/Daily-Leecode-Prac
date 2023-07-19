@@ -29,3 +29,22 @@ class WordDictionary(object):
         :type word: str
         :rtype: bool
         """
+        def dfs(j, root):
+            cur = root
+
+            for i in range(j, len(word)):
+                char = word[i]
+
+                if char == '.':
+                    for child in cur.children.values():
+                        if dfs(i + 1, child):
+                            return True
+                    return False
+                else:
+                    if char not in cur.children:
+                        return False
+                    cur = cur.children[char]
+
+            return cur.end
+
+        return dfs(0, self.root)
