@@ -24,4 +24,15 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         distance = []
+        for x, y in points:
+            dist = abs(x)**2 + abs(y)**2
+            distance.append([dist, x, y])
         
+        heapq.heapify(distance)
+        res = []
+
+        for i in range(0, k):
+            dist, x, y = heapq.heappop(distance)
+            res.append([x, y])
+
+        return res
