@@ -30,8 +30,8 @@ import heapq
 class MedianFinder(object):
 
     def __init__(self):
-        self.minHeap = []
-        self.maxHeap = []
+        self.minHeap = [] # means we need to get the minimum in this heap
+        self.maxHeap = [] # means we need to get the -minimum in this heap, because all elements here is negative, so -minimum is maximum
 
     def addNum(self, num):
         """
