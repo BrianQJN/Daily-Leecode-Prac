@@ -25,7 +25,6 @@ class Solution(object):
                 cur.append(nums[i])
                 dfs(i + 1, cur)
                 cur.pop()
-                return
             
         dfs(0, [])
 
