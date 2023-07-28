@@ -20,7 +20,7 @@ class Solution(object):
             """
             # boundary condition
             # if cur position is out of board, or cur char is not equal to cur word char, return false
-            if i < 0 or i > len(board) or j < 0 or j > len(board[0]) or board[i][j] != word[k]:
+            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or board[i][j] != word[k]:
                 return False
             
             # if we have found the full path, return true
