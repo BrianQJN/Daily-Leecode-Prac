@@ -10,6 +10,9 @@ Output: true
 Explanation: There are a total of 2 courses to take. 
 To take course 1 you should have finished course 0. So it is possible.
 """
+from collections import deque
+
+
 class Solution(object):
     def canFinish(self, numCourses, prerequisites):
         """
@@ -51,3 +54,33 @@ class Solution(object):
                 return False
             
         return True
+    
+    def canFinish2(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        # count number of prerequisites of each course, and construct directed graph
+        prerequisite_count = [0] * numCourses
+        graph = {i: [] for i in range(numCourses)}
+        for course, prerequisite in prerequisites:
+            prerequisite_count[course] += 1
+            graph[prerequisite].append(course)
+
+        # add the course without prerequisites into deque
+        queue = deque([course for course in range(numCourses) if prerequisite_count[course] == 0])
+
+        while queue:
+            course = queue.popleft()
+            numCourses -= 1
+            # traverse every course that need this course as prerequisite
+            for next_course in graph[course]:
+                # redue the number of prerequisites the next course needs
+                prerequisite_count[next_course] -= 1
+                # if the prerequisites count become 0, add it to the queue
+                if prerequisite_count[next_course] == 0:
+                    queue.append(next_course)
+        
+        # if every course is processed, numCourses would be 0, return True. Otherwise, there is a cycle, return False
+        return numCourses == 0
