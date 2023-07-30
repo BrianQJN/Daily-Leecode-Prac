@@ -45,3 +45,4 @@ class Solution(object):
                     # Update the distance to the gate and add the new position to the queue
                     rooms[new_row][new_col] = rooms[cur_row][cur_col] + 1
                     queue.append((new_row, new_col))
+                    
