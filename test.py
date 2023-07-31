@@ -1,2 +1,3 @@
-root = [1,2,3]
-print([-num for num in root])
+n = 3
+dp = [[] for _ in range(n)]
+print(dp)
