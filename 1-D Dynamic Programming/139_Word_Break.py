@@ -29,7 +29,7 @@ class Solution(object):
                     break
         
         # we need to check at the end of the strings to see if it can be segmented in the dictionary
-        return dp
+        return dp[-1]
     
 if __name__ == '__main__':
     s = "leetcode"
