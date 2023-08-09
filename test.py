@@ -1,12 +1,3 @@
-a, b = 1, 2
-a = a & b
-print(a)
-a, b = 1, 2
-a = a | b
-print(a)
-a, b = 1, 2
-a ^= b
-print(a)
-a, b = 1, 2
-a = ~a
-print(a)
+a = 123
+print(a % 10)
+print(a // 10)
