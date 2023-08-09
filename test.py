@@ -1,3 +1,12 @@
-n = 3
-dp = [[] for _ in range(n)]
-print(dp)
+a, b = 1, 2
+a = a & b
+print(a)
+a, b = 1, 2
+a = a | b
+print(a)
+a, b = 1, 2
+a ^= b
+print(a)
+a, b = 1, 2
+a = ~a
+print(a)
