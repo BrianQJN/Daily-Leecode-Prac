@@ -33,13 +33,14 @@ class Solution(object):
         for i in range(len(words)-1):
             word1, word2 = words[i], words[i+1]
             min_len = min(len(word1), len(word2))
+            if min_len == len(word2) and word1[0:min_len] == word2:
+                return ""
 
             for j in range(min_len):
                 if word1[j] != word2[j]:
                     graph[word1[j]].append(word2[j])
                     indegree[word2[j]] += 1
                     break
-                return ""
 
         # initialize the queue with chars that have 0 indegree
         queue = deque([char for char in indegree if indegree[char] == 0])
