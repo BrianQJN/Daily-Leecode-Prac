@@ -33,7 +33,7 @@ class Solution(object):
         for i in range(len(words)-1):
             word1, word2 = words[i], words[i+1]
             min_len = min(len(word1), len(word2))
-            if min_len == len(word2) and word1[0:min_len] == word2:
+            if len(word1) != len(word2) and min_len == len(word2) and word1[0:min_len] == word2:
                 return ""
 
             for j in range(min_len):
