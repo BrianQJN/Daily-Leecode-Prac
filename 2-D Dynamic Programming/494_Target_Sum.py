@@ -18,13 +18,21 @@ Explanation: There are 5 ways to assign symbols to make the sum of nums be targe
 """
 class Solution:
     def findTargetSumWays(self, nums: list[int], target: int) -> int:
-        n = len(nums)
         max_sum = sum(nums)
 
-        # initialize the dp array
-        # dp[i][j] records the amount of ways to construct sum to j using nums[0:i+1]
-        dp = [[0] * (2 * max_sum + 1) for _ in range(n)]
-        # base case, since using nums[0], can only have one way to construct sum to -nums[0] or nums[0]
-        dp[0][nums[0]], dp[0][-nums[0]] = 1, 1
+        # boundary conditions, if the abs of target is greater than the sum of nums, means no mattet how to combine, no way
+        # and if (target + max_sum) % 2 != 0 means we can't find combinations that sum are (target + max_sum) / 2
+        if abs(target) > max_sum or (target + max_sum) % 2 != 0:
+            return 0
+        
+        target = (target + max_sum) // 2
 
-        for 
+        # initialize the dp array to record the ways to sum to i
+        dp = [0] * (target + 1)
+        dp[0] = 1
+
+        for num in nums:
+            for j in range(target, num - 1, -1):
+                dp[j] = dp[j] + dp[j - num]
+
+        return dp[-1]
