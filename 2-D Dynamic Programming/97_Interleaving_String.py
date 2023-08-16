@@ -38,6 +38,11 @@ class Solution:
                     dp[i][j] = dp[i-1][j]
                 # if cur char in s2 is equal to cur char in s3
                 if j > 0 and s2[j-1] == s3[i+j-1]:
-                    dp[i][j] = dp[i][j-1]
+                    dp[i][j] = dp[i][j-1] or dp[i][j]
+                
+                print(i, j)
+                print(dp[i][j])
 
         return dp[m][n]
+    
+Solution.isInterleave(Solution, "abc", "def", "adbcef")
