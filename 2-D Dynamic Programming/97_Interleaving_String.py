@@ -31,18 +31,17 @@ class Solution:
         dp = [[False] * (n + 1) for _ in range(m + 1)]
         dp[0][0] = True
 
-        for i in range(m + 1):
-            for j in range(n + 1):
-                # if cur char in s1 is equal to cur char in s3
-                if i > 0 and s1[i-1] == s3[i+j-1]:
-                    dp[i][j] = dp[i-1][j]
-                # if cur char in s2 is equal to cur char in s3
-                if j > 0 and s2[j-1] == s3[i+j-1]:
-                    dp[i][j] = dp[i][j-1] or dp[i][j]
-                
-                print(i, j)
-                print(dp[i][j])
+        # initialize the dp[i][0]
+        for i in range(1, m+1):
+            dp[i][0] = dp[i-1][0] and s1[i-1] == s3[i-1]
 
+        # initialize the dp[0][j]
+        for j in range(1, n+1):
+            dp[0][j] = dp[0][j-1] and s2[j-1] == s3[j-1]
+
+        # traverse the dp array
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                dp[i][j] = (dp[i-1][j] and s1[i-1] == s3[i+j-1]) or (dp[i][j-1] and s2[j-1] == s3[i+j-1])
+        
         return dp[m][n]
-    
-Solution.isInterleave(Solution, "abc", "def", "adbcef")
