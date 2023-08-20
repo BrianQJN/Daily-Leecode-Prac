@@ -31,8 +31,13 @@ class Solution:
         for length in range(2, n+1):
             for i in range(1, n+2-length):
                 j = i + length - 1
-                # calculate the max coins we can get if we burst balloon k
+                # calculate the max coins we can get if we burst balloon k last
                 for k in range(i, j+1):
+                    # i <= k <= j
+                    # burst k last, means the left of k is nums[i-1] and right is nums[j+1]
+                    # so burst k we can get nums[i-1] * nums[k] * nums[j+1]
+                    # and we need to consider the coins we can get from i to k-1, and k+1 to j
+                    # so we need to add dp[i][k-1] and dp[k+1][j]
                     dp[i][j] = max(dp[i][j], dp[i][k-1] + nums[i-1] * nums[k] * nums[j+1] + dp[k+1][j])
         
         return dp[1][n]
