@@ -35,6 +35,6 @@ class Solution:
                 current += 1
             elif nums[current] == 2:
                 nums[current], nums[high] = nums[high], nums[current]
-                hight -= 1
+                high -= 1
             else:
                 current += 1
