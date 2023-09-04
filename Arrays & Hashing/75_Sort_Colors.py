@@ -10,7 +10,7 @@ Input: nums = [2,0,2,1,1,0]
 Output: [0,0,1,1,2,2]
 """
 class Solution:
-    def sortColors(self, nums: list[int]) -> None:
+    def BubbleSort(self, nums: list[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
@@ -20,4 +20,21 @@ class Solution:
             for j in range(1, n - i):
                 if nums[j] > nums[j - 1]:
                     nums[j], nums[j-1] = nums[j-1], nums[j]
-        
+
+    def sortColors(self, nums: list[int]) -> None:
+        # low represents next index of 0, high represents next index of 2
+        low = 0
+        high = len(nums) - 1
+        current = 0
+
+        # traverse the array nums:
+        while current <= high:
+            if nums[current] == 0:
+                nums[current], nums[low] = nums[low], nums[current]
+                low += 1
+                current += 1
+            elif nums[current] == 2:
+                nums[current], nums[high] = nums[high], nums[current]
+                hight -= 1
+            else:
+                current += 1
